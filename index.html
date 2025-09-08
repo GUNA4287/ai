@@ -25,7 +25,7 @@
       font-size: 1.5rem;
       font-weight: 800;
       background: linear-gradient(90deg,#ff6b6b,#7c5cff);
-      -webkit-background-clip: text;
+     background-clip: text;
       color: transparent;
     }
     nav a {
@@ -55,13 +55,22 @@
       border-radius: 12px;
       box-shadow: 0 8px 30px rgba(124,92,255,0.4);
     }
-    #ai-brain-container {
-      width: 100%;
-      height: 500px;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 0 40px rgba(124,92,255,0.2);
-    }
+    #ai-brain-container { 
+  width: 100%;
+  height: 500px; /* default for desktop */
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(124,92,255,0.2);
+}
+
+/* Smaller height for mobile */
+@media (max-width: 768px) {
+  #ai-brain-container {
+    height: 300px;
+    margin-bottom: 2rem; /* spacing between brain and text */
+  }
+}
+
     section {
       padding: 5rem 0;
     }
@@ -76,26 +85,190 @@
 <body>
 
   <!-- Navbar -->
-  <header class="container d-flex justify-content-between align-items-center">
-    <div class="logo">Hidan AI</div>
-    <nav>
-      <a href="#features" class="me-3 text-light text-decoration-none">Features</a>
-      <a href="#ai-3d" class="me-3 text-light text-decoration-none">3D Demo</a>
-      <a href="#ask-ai" class="me-3 text-light text-decoration-none">Ask AI</a>
-      <a href="#research" class="me-3 text-light text-decoration-none">Research</a>
-      <a href="#about" class="me-3 text-light text-decoration-none">About</a>
-      <a href="#contact" class="text-light text-decoration-none">Contact</a>
-    </nav>
-  </header>
+<!-- Header -->
+<!-- Header -->
+<!-- Header -->
+<!-- Header -->
+<header class="navbar navbar-expand-lg fixed-top shadow-lg py-3" 
+        style="background: rgba(10, 15, 40, 0.95); backdrop-filter: blur(10px); z-index: 1000;">
+  <div class="container-fluid">
+    
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold fs-4 text-gradient" href="#">
+      🚀 Hidan AI
+    </a>
 
-  <!-- Hero Section -->
-  <section id="ai-3d" class="hero container">
+    <!-- Toggler (Hamburger) -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav text-center">
+        <li class="nav-item"><a href="#features" class="nav-link menu-link">Features</a></li>
+        <li class="nav-item"><a href="#ai-3d" class="nav-link menu-link">3D Demo</a></li>
+        <li class="nav-item"><a href="#ask-ai" class="nav-link menu-link">Ask AI</a></li>
+        <li class="nav-item"><a href="#research" class="nav-link menu-link">Research</a></li>
+        <li class="nav-item"><a href="#about" class="nav-link menu-link">About</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link menu-link">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<!-- Spacer so navbar doesn’t cover content -->
+<div style="margin-top: 90px;"></div>
+
+<script>
+  // Close navbar on link click (for mobile)
+  document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const navbar = document.querySelector('.navbar-collapse');
+      const bsCollapse = new bootstrap.Collapse(navbar, {
+        toggle: false
+      });
+      bsCollapse.hide();
+    });
+  });
+</script>
+
+
+<!-- Bootstrap CSS & JS (make sure these are included in your <head> and before </body>) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Space for navbar -->
+
+
+<!-- Example Sections -->
+
+
+<!-- Styles -->
+<style>
+.text-gradient {
+  background: linear-gradient(90deg, #00c6ff, #ff6ec4);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.menu-link {
+  position: relative;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+.menu-link:hover {
+  color: #00c6ff;
+  transform: translateY(-4px) scale(1.1) rotateX(10deg);
+  text-shadow: 0px 0px 12px rgba(0,198,255,0.9);
+}
+.menu-link.active {
+  color: #ff6ec4;
+  font-weight: 700;
+  text-shadow: 0px 0px 18px rgba(255,110,196,1), 0px 0px 30px rgba(0,198,255,0.8);
+}
+.menu-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #00c6ff, #ff6ec4);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+  border-radius: 5px;
+}
+.menu-link:hover::after,
+.menu-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+/* Section height demo */
+.section-color {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+
+<!-- Scroll spy JS -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".menu-link");
+
+  window.addEventListener("scroll", () => {
+    let current = "";
+    sections.forEach(sec => {
+      const secTop = sec.offsetTop - 120;
+      const secHeight = sec.clientHeight;
+      if (pageYOffset >= secTop && pageYOffset < secTop + secHeight) {
+        current = sec.getAttribute("id");
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove("active");
+      if (link.getAttribute("href") === "#" + current) {
+        link.classList.add("active");
+      }
+    });
+  });
+});
+</script>
+
+
+<!-- Script to highlight active section on click -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".menu-link");
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      links.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+    });
+  });
+});
+</script>
+
+
+<!-- Script to highlight active section dynamically -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const links = document.querySelectorAll(".menu-link");
+  links.forEach(link => {
+    link.addEventListener("click", () => {
+      links.forEach(l => l.classList.remove("active"));
+      link.classList.add("active");
+    });
+  });
+});
+</script>
+
+
+
+
+
+
+<section id="ai-3d" class=" container py-5">
+  <div class="row ">
+    
     <!-- Left: 3D Brain -->
-    <div id="ai-brain-container"></div>
+    <div class="col-12 col-lg-6 text-center mb-4 mb-lg-0">
+        <div id="ai-brain-container"></div>
+    </div>
 
     <!-- Right: Text -->
-    <div>
-      <h1 data-aos="fade-up">Explore the Future with <span style="color:#7c5cff">Hidan AI</span></h1>
+    <div class="col-12 col-lg-6 text-center text-lg-start ">
+      <h1 data-aos="fade-up">
+        Explore the Future with <span style="color:#7c5cff">Hidan AI</span>
+      </h1>
       <p class="mt-3 text-muted" data-aos="fade-up" data-aos-delay="100">
         Interactive 3D AI visualizations and smart demos — all in one place.
       </p>
@@ -103,7 +276,28 @@
         <button class="btn-glow">Get Started</button>
       </div>
     </div>
-  </section>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Hero Section -->
+  
 
   <!-- Features -->
 <!-- Features -->
@@ -185,6 +379,7 @@
   transition: transform 0.5s ease, box-shadow 0.5s ease;
   perspective: 1000px;
   animation: floatCard 6s ease-in-out infinite;
+  border-color: white;border-width: 20px;
 
   /* Uniform height */
   min-height: 220px;
@@ -222,24 +417,126 @@
 
 
 
-  <!-- Ask AI -->
-  <section id="ask-ai" class="container">
-    <h2 class="text-center mb-4" data-aos="fade-up">🔮 Ask Hidan AI Anything</h2>
-    <p class="text-center text-muted mb-4">Type your question and get a researched, clear answer.</p>
-    <div class="glass p-4 rounded-4 shadow-lg" data-aos="fade-up" style="background:#111827;">
-      <div class="input-group mb-3">
-        <input id="ai-question" type="text" class="form-control" placeholder="e.g. What is machine learning?">
-        <button class="btn-glow" id="btn-ask">Ask</button>
-      </div>
-      <div id="ai-loading" class="text-center my-3" style="display:none;">
-        <div class="spinner-border text-accent"></div>
-        <p class="mt-2 muted">Hidan AI is thinking...</p>
-      </div>
-      <div id="ai-answer" class="p-3 bg-dark rounded-3 text-light" style="min-height:120px;">
-        <em>Your AI answer will appear here...</em>
+
+<!-- Ask AI Section -->
+<!-- Ask AI Section -->
+<section id="ask-ai" class="container py-5">
+  <div class="row align-items-center g-5">
+
+    <!-- Left: AI Content -->
+    <div class="col-md-6" data-aos="fade-right" data-aos-duration="1200">
+      <h2 class="mb-4 fw-bold text-white">🔮 Ask Hidan AI</h2>
+      <p class="lead mb-3 " style="color: white;">
+        Type your question and get a clear AI-powered answer.<br>
+        (Login required before asking.)
+      </p>
+
+      <div class="glass p-4 rounded-4 shadow-lg" style="background:#111827;">
+        <div class="input-group mb-3">
+          <input id="ai-question" type="text" class="form-control" placeholder="e.g. What is deep learning?">
+          <!-- Ask button opens modal -->
+<!-- Ask button (inside Ask AI section) -->
+<button id="btn-ask" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#askModal">Ask</button>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- Right: AI GIF Image -->
+    <div class="col-md-6 text-center" data-aos="fade-left" data-aos-duration="1200">
+      <div class="card shadow-lg border-0 rounded-4 overflow-hidden" style="height:350px;">
+        <img src="data/askai.gif" 
+             alt="AI Animation" 
+             style="width:100%; height:100%; object-fit:cover;">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Unified Modal -->
+<!-- Hidan AI Modal -->
+<div class="modal fade" id="askModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0 rounded-4 shadow-lg" 
+         style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); color: #fff;">
+
+      <!-- Modal Header -->
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold text-glow">🤖 Welcome to Hidan AI</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body text-center">
+
+        <!-- 3D Animation / Lottie -->
+        
+        
+        <!-- AI Message -->
+        <p class="lead fw-semibold mb-4" style="color:#e0f7fa;">
+          To explore <span class="text-warning">Hidan AI</span>, please log in to your account first.  
+          Don’t have an account yet? Create one in seconds!
+        </p>
+
+        <!-- Buttons -->
+        <div class="d-flex justify-content-center gap-3">
+          <button class="btn px-4 py-2 rounded-pill fw-bold shadow-sm" 
+                  style="background:#00c6ff; color:#fff;">
+            🔑 Login Account
+          </button>
+          <button class="btn px-4 py-2 rounded-pill fw-bold shadow-sm" 
+                  style="background:#f7971e; color:#fff;">
+            ✨ Create Account
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lottie Animation Script -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+
+<script>
+  // Handle login step
+  document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("login-step").style.display = "none";
+    document.getElementById("ai-step").style.display = "block";
+  });
+
+  // Handle AI answer
+  document.getElementById("btn-get-answer").addEventListener("click", function(){
+    let question = document.getElementById("modal-question").value.trim();
+    let loading = document.getElementById("ai-loading");
+    let answerBox = document.getElementById("ai-answer");
+
+    if(question === ""){
+      alert("Please enter a question!");
+      return;
+    }
+
+    loading.style.display = "block";
+    answerBox.innerHTML = "";
+
+    setTimeout(()=>{
+      loading.style.display = "none";
+      answerBox.innerHTML = "✨ This is a demo answer for: <b>" + question + "</b><br>Hidan AI will provide a researched, clear explanation here.";
+    }, 2000);
+  });
+</script>
+
+<!-- Bootstrap JS (must be added before closing body) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+
 
   <!-- Research -->
 <section id="research" class="container">
@@ -340,35 +637,27 @@
 <!-- About section -->
 
 <!-- About section -->
-<section id="about" 
-         class="container-fluid py-5" 
-         style="background: linear-gradient(135deg, #131d31, #05132b, #6dd5ed); color: #f8f9fa;">
+<section id="about" class="container-fluid py-5" style="background: linear-gradient(135deg, #131d31, #05132b, #6dd5ed); color: #f8f9fa;">
   <div class="container">
-    <div class="row align-items-center g-5">
+    <div class=" align-items-center g-5">
 
       <!-- Left: About Content -->
-      <div class="col-md-6" data-aos="fade-right" data-aos-duration="1200">
+      <div class="" data-aos="fade-right" data-aos-duration="1200">
         <h2 class="mb-4 fw-bold text-white">ℹ️ About Hidan AI</h2>
-        <p class="lead mb-3" style="color:#e0f7fa;">
+        <p class="lead mb-3 text-light">
           Hidan AI is a next-generation platform for interactive AI exploration.
           Our mission is to make AI research accessible, intuitive, and engaging.
         </p>
         <ul class="list-unstyled">
-          <li class="mb-2">✨ <span style="color:#ffe57f;">Answer complex questions instantly</span></li>
-          <li class="mb-2">🌐 <span style="color:#ffccbc;">Visualize 3D neural and AI concepts</span></li>
-          <li class="mb-2">📚 <span style="color:#c5e1a5;">Explore tutorials, projects, and AI datasets</span></li>
-          <li class="mb-2">🚀 <span style="color:#b39ddb;">Enhance learning with hands-on AI demos</span></li>
+          <li class="mb-2">✨ <span class="text-warning">Answer complex questions instantly</span></li>
+          <li class="mb-2">🌐 <span class="text-danger">Visualize 3D neural and AI concepts</span></li>
+          <li class="mb-2">📚 <span class="text-success">Explore tutorials, projects, and AI datasets</span></li>
+          <li class="mb-2">🚀 <span class="text-info">Enhance learning with hands-on AI demos</span></li>
         </ul>
       </div>
 
       <!-- Right: Animated Image -->
-      <div class="col-md-6 text-center" data-aos="zoom-in" data-aos-duration="1500">
-        <div style="width:100%; height:350px; border-radius:25px; overflow:hidden; box-shadow:0 8px 30px rgba(0,0,0,0.4);">
-          <img src="about1.gif" 
-               alt="AI Animation" 
-               style="width:100%; height:100%; object-fit:cover; display:block; border-radius:25px;">
-        </div>
-      </div>
+      
 
     </div>
   </div>
@@ -380,20 +669,80 @@
 
 
   <!-- Contact -->
-  <section id="contact" class="container">
-    <h3 class="text-center mb-3">📩 Contact Us</h3>
-    <p class="text-center text-muted">Get in touch for collaboration and demos.</p>
-    <div class="row justify-content-center mt-3">
-      <div class="col-md-6">
-        <form class="p-3 bg-dark rounded-4">
-          <input type="text" class="form-control mb-2" placeholder="Your Name">
-          <input type="email" class="form-control mb-2" placeholder="Your Email">
-          <textarea class="form-control mb-2" placeholder="Message"></textarea>
-          <button class="btn-glow w-100">Send</button>
+<!-- Contact Section -->
+<section id="contact" class="py-5 position-relative" 
+         style="background: linear-gradient(135deg, #131d31, #05132b, #6dd5ed); color: #f8f9fa;">
+  
+  <!-- Animated floating shapes -->
+  <div class="floating-shape shape1"></div>
+  <div class="floating-shape shape2"></div>
+  <div class="floating-shape shape3"></div>
+
+  <div class="container position-relative" data-aos="fade-up" data-aos-duration="1200">
+    <h3 class="text-center mb-3 fw-bold">📩 Contact Us</h3>
+    <p class="text-center">Get in touch for collaboration and demos.</p>
+
+    <div class="row justify-content-center mt-4">
+      <div class="col-12 col-md-8 col-lg-6">
+        <!-- Glassmorphic Contact Card -->
+        <form class="p-4 rounded-4 shadow-lg glass-card" data-aos="zoom-in" data-aos-duration="1500">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="Your Name">
+          </div>
+          <div class="mb-3">
+            <input type="email" class="form-control" placeholder="Your Email">
+          </div>
+          <div class="mb-3">
+            <textarea class="form-control" rows="4" placeholder="Message"></textarea>
+          </div>
+          <button type="submit" class="btn btn-gradient w-100 fw-bold">🚀 Send Message</button>
         </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+
+<!-- Styles -->
+<style>
+  /* Glassmorphic card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Gradient button */
+.btn-gradient {
+  background: linear-gradient(90deg, #00c6ff, #ff6ec4);
+  color: #fff;
+  border: none;
+  transition: all 0.3s ease;
+}
+.btn-gradient:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,198,255,0.4);
+}
+
+/* Floating shapes */
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: float 6s ease-in-out infinite;
+}
+.shape1 { width: 120px; height: 120px; background: #ff6ec4; top: 10%; left: 5%; }
+.shape2 { width: 150px; height: 150px; background: #00c6ff; bottom: 15%; right: 10%; animation-delay: 2s; }
+.shape3 { width: 80px; height: 80px; background: #6dd5ed; bottom: 30%; left: 20%; animation-delay: 4s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+</style>
+
 
   <!-- Footer -->
   <footer>
@@ -496,6 +845,15 @@
       }, 2000);
     });
   </script>
+
+
+  
+
+    <!-- Bootstrap JS for modal -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
 
 </body>
 </html>
